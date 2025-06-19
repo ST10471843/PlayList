@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Playlist\'d</string>
+    <string name="Title">Title</string>
+    <string name="Artist">Artist</string>
+    <string name="Rate">Rate(1–5)</string>
+    <string name="Comment">Comment</string>
+    <string name="Next">Next</string>
+    <string name="Exit">Exit</string>
+    <string name="Add_to_playlist">Add to Playlist</string>
+    <string name="Display">Display</string>
+    <string name="Review">Review</string>
+    <string name="Average">Average</string>
+    <string name="Back">Back</string>
+    <string name="Rank">Rank</string>
+    <string name="Average_Rating">Average Rating</string>
+    <string name="add_songs_to_playlist">Add songs to playlist.</string>
+</resources>
