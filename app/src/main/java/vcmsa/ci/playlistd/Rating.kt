@@ -8,21 +8,24 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.google.android.material.snackbar.Snackbar
+
 
 
 class Rating : AppCompatActivity() {
+
     //variables
     private lateinit var tvDisplay: TextView
     private lateinit var btnReview: Button
     private lateinit var tvAverage: TextView
     private lateinit var btnAverage: Button
     private lateinit var btnBack: Button
+
 //array declaration
-    private val title = mutableListOf<String>()
-    private val artist = mutableListOf<String>()
-    private val rating = mutableListOf<Int>()
-    private val comments = mutableListOf<String>()
+
+    data class Song(val title: String, val artist: String, val rating: String, val comments: String)
+    val songs = mutableListOf<Song>()
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,12 +43,13 @@ class Rating : AppCompatActivity() {
         btnBack = findViewById(R.id.btnBack)
 
         btnReview.setOnClickListener {
-                displayPlaylist()
+            displayPlaylist()
 
         }
 
         btnAverage.setOnClickListener {
-           displayAverage()
+           val average= displayAverage()
+            tvAverage.text= "Average Rating: %.2f".format(average)
 
         }
 // to allow the user back to the main screen
@@ -57,10 +61,6 @@ class Rating : AppCompatActivity() {
     }
     // to display everything the User has inputted
     // Define this outside of your function, at the class level or top of your file
-    data class Song(val title: String, val artist: String, val rating: String, val comments: String)
-
-    // Also at the class level, keep your playlist here
-    val songs = mutableListOf<Song>()
 
     private fun displayPlaylist() {
         if (songs.isNotEmpty()) {
@@ -79,17 +79,25 @@ class Rating : AppCompatActivity() {
 
 
     //Function to display Average ratings
+
     private fun displayAverage(): Double {
-        if (rating.isEmpty()) return 0.0
+        if (songs.isEmpty()) return 0.0
 
-        var totalRating = 0
-        for (i in rating.indices) {
-            totalRating += rating[i]
+        var totalRating = 0.0
+        var count = 0
+        for (song in songs) {
+            val rate = song.rating.toDoubleOrNull()
+            if (rate != null) {
+                totalRating += rate
+                count++
+            }
         }
-        return totalRating.toDouble() / rating.size
+        return if (count > 0) totalRating / count else 0.0
     }
-
 }
+
+
+
 
 
 

@@ -27,7 +27,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnAdd: Button
     private lateinit var btnNext: Button
     private lateinit var btnExit: Button
-    private val playlist = mutableListOf<String>()
+
+    data class Song(val title: String, val artist: String, val rating: Int, val comments: String)
+
+    private val playList = mutableListOf<Song>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,15 +51,13 @@ class MainActivity : AppCompatActivity() {
         btnNext = findViewById(R.id.btnNext)
         btnExit = findViewById(R.id.btnExit)
 
-
-
-
         btnAdd.setOnClickListener {
             showAddItemDialog()
         }
+
 //to allow the user to change to the next screen
-        btnNext.setOnClickListener{
-            val intent = Intent(this,Rating::class.java)
+        btnNext.setOnClickListener {
+            val intent = Intent(this, Rating::class.java)
             startActivity(intent)
         }
 //to allow user to exit the app
@@ -65,18 +66,13 @@ class MainActivity : AppCompatActivity() {
             exitProcess(0)
 
         }
-
-
-        }
-    //function to allow user to add information to play list
+    }
+    //im trying to store without displaying as yet
     private fun showAddItemDialog() {
-
-        data class Song(val title: String, val artist: String, val rating: Int, val comments: String)
-
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Add New Song")
-
-        val view = layoutInflater.inflate(R.layout.activity_main, null)
+//variables
+        val view = layoutInflater.inflate(R.layout.dialog_add_item, null)
         val etTitle: EditText = view.findViewById(R.id.etTitle)
         val etArtist: EditText = view.findViewById(R.id.etArtist)
         val etRate: EditText = view.findViewById(R.id.etRate)
@@ -90,22 +86,32 @@ class MainActivity : AppCompatActivity() {
             val ratingStr = etRate.text.toString().trim()
             val comments = etComment.text.toString().trim()
 
-            if (title.isEmpty() || artist.isEmpty() || ratingStr.isEmpty()|| comments.isEmpty()) {
-                Snackbar.make(findViewById(android.R.id.content), "Title, artist,rating and comment cannot be empty.", Snackbar.LENGTH_SHORT).show()
+
+            //error handling
+            if (title.isEmpty() || artist.isEmpty() || ratingStr.isEmpty() || comments.isEmpty()) {
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "Title, artist, rating and comment cannot be empty.",
+                    Snackbar.LENGTH_SHORT
+                ).show()
                 return@setPositiveButton
             }
 
             val rating = ratingStr.toIntOrNull()
             if (rating == null || rating < 1 || rating > 5) {
-                Snackbar.make(findViewById(android.R.id.content), "Invalid rating. Please enter a number between 1 and 5 .", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "Invalid rating. Please enter a number between 1 and 5.",
+                    Snackbar.LENGTH_SHORT
+                ).show()
                 return@setPositiveButton
             }
 
-            playlist.add(Song(title,artist,rating,comments).toString())
-
-
-            Snackbar.make(findViewById(android.R.id.content), "$title added to the playlist.", Snackbar.LENGTH_SHORT).show()
-            dialog.dismiss()
+            playList.add(Song(title, artist, rating, comments))
+            Snackbar.make(findViewById(android.R.id.content),
+                "$title added to the playlist.",
+                Snackbar.LENGTH_SHORT).show()
+            // The list will be used on the next screen.
         }
 
         builder.setNegativeButton("Cancel") { dialog, _ ->
@@ -114,4 +120,4 @@ class MainActivity : AppCompatActivity() {
 
         builder.show()
     }
-    }
+}

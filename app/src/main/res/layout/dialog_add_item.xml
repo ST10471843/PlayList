@@ -1,6 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_launcher_background"
+        android:backgroundTint="@color/white"
+        tools:context=".MainActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:id="@+id/AppName"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:fontFamily="@font/rem_thin"
+                android:text="@string/app_name"
+                android:textAlignment="center"
+                android:textColor="@color/CORAL"
+                android:textSize="48sp" />
+
+            <Button
+                android:id="@+id/btnAdd"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="53dp"
+                android:layout_marginBottom="45dp"
+                android:backgroundTint="@color/CORAL"
+                android:text="@string/Add_to_playlist"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/etTitle"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:autofillHints="name"
+                android:ems="10"
+                android:hint="@string/Title"
+                android:inputType="text"
+                android:textAlignment="center"
+                android:textColorHint="#78909C"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/etArtist"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:autofillHints="name"
+                android:ems="10"
+                android:hint="@string/Artist"
+                android:inputType="text"
+                android:textAlignment="center"
+                android:textColorHint="#78909C"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/etRate"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:autofillHints="name"
+                android:ems="10"
+                android:hint="@string/Rate"
+                android:inputType="text"
+                android:textAlignment="center"
+                android:textColorHint="#78909C"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/etComment"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:autofillHints="name"
+                android:ems="10"
+                android:hint="@string/Comment"
+                android:inputType="text"
+                android:textAlignment="center"
+                android:textColorHint="#78909C"
+                android:textSize="24sp" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="45dp"
+            android:backgroundTint="@color/CORAL"
+            android:text="@string/Next"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/btnExit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <Button
+            android:id="@+id/btnExit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp"
+            android:backgroundTint="@color/CORAL"
+            android:text="@string/Exit"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
